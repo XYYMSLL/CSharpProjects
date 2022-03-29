@@ -133,12 +133,15 @@ namespace Day1HW
                     Console.Write("请确认密码：");
                     inputPassword2 = Console.ReadLine();
 
-                    if (inputPassword == inputPassword2)
+                    if (inputPassword == inputPassword2 && inputPassword != "")
                     {
                         Console.WriteLine("注册成功");
                         registed = true;
                         username = inputUsername;
                         password = inputPassword;
+                    }
+                    else {
+                        Console.WriteLine("确认密码必须与输入的密码一致");
                     }
                 }
                 else {
@@ -165,9 +168,12 @@ namespace Day1HW
             {
                 Calculator();
             }
-            else
+            else if (int.Parse(choice) == 2)
             {
                 LoginSimulator();
+            }
+            else {
+                Console.WriteLine("Invalid input");
             }
         }
     }
