@@ -4,6 +4,9 @@ namespace Day1HW
 {
     class MainClass
     {
+
+        #region calculater
+
         static bool CheckNumeric(string str) {
             bool doted = false;
             foreach (char c in str) {
@@ -69,6 +72,10 @@ namespace Day1HW
                 Console.WriteLine("Invalid calculation note");
             }
         }
+
+        #endregion
+
+        #region Login
 
         static byte Login(string username, string correctUsername, string password, string correctPassword)
         {
@@ -155,10 +162,12 @@ namespace Day1HW
             }
         }
 
+        #endregion
+
         public static void Main(string[] args)
         {
             /**
-             * 1.制作简单的计算器，提示输入第一个数，输入后提示输入第二个数，然后提示输入符号+-* /
+             * 1.制作简单的计算器，提示输入第一个数，输入后提示输入第二个数，然后提示输入符号+ - * /
              * 2.完成一个简单的登录注册功能，提示输入1登录，输入2注册，注册时提示输入账号，输入密码，输入确认密码，缺人两次密码相同在提示注册成功，返回登陆界面，提示输入账号输入密码，正确提示登录成功，错误提示登录失败
              */
             Console.WriteLine("输入1运行1计算器，输入2运行2登录");
