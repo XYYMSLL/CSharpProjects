@@ -41,35 +41,33 @@ namespace Day1HW
             double num1 = double.Parse(num1Str);
             double num2 = double.Parse(num2Str);
 
-            Console.Write("输入运算方法：");
+            Console.Write("输入运算方法(+ - * /)：");
             string sign = Console.ReadLine();
 
-            if (sign == "+")
+            switch (sign)
             {
-                Console.WriteLine(num1 + num2);
-            }
-            else if (sign == "-")
-            {
-                Console.WriteLine(num1 - num2);
-            }
-            else if (sign == "*")
-            {
-                Console.WriteLine(num1 * num2);
-            }
-            else if (sign == @"/")
-            {
-                if (num2 == 0)
-                {
-                    Console.WriteLine("Second number cannot be 0");
-                }
-                else
-                {
-                    Console.WriteLine(num1 / num2);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Invalid calculation note");
+                case "+":
+                    Console.WriteLine(num1 + num2);
+                    break;
+                case "-":
+                    Console.WriteLine(num1 - num2);
+                    break;
+                case "*":
+                    Console.WriteLine(num1 * num2);
+                    break;
+                case "/":
+                    if (num2 == 0)
+                    {
+                        Console.WriteLine("Infinity");
+                    }
+                    else
+                    {
+                        Console.WriteLine(num1 / num2);
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Invalid calculation method");
+                    break;
             }
         }
 
@@ -184,6 +182,8 @@ namespace Day1HW
             else {
                 Console.WriteLine("Invalid input");
             }
+
+            return;
         }
     }
 }
