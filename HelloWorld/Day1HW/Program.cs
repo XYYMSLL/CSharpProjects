@@ -7,10 +7,13 @@ namespace Day1HW
 
         #region calculater
 
-        static bool CheckNumeric(string str) {
+        static bool CheckNumeric(string str)
+        {
             bool doted = false;
-            foreach (char c in str) {
-                if (!char.IsDigit(c)) {
+            foreach (char c in str)
+            {
+                if (!char.IsDigit(c))
+                {
                     if (c.Equals('.') && doted == false)
                     {
                         doted = true;
@@ -33,7 +36,8 @@ namespace Day1HW
             Console.Write("输入第二个数：");
             string num2Str = Console.ReadLine();
 
-            if (!CheckNumeric(num1Str) || !CheckNumeric(num2Str)) {
+            if (!CheckNumeric(num1Str) || !CheckNumeric(num2Str))
+            {
                 Console.WriteLine("Invalid number.");
                 return;
             }
@@ -75,19 +79,25 @@ namespace Day1HW
 
         #region Login
 
-        static byte Login(string username, string correctUsername, string password, string correctPassword)
+        static byte Login(string correctUsername, string correctPassword)
         {
+            string inputUsername;
+            string inputPassword;
+            Console.Write("请输入用户名：");
+            inputUsername = Console.ReadLine();
+            Console.Write("请输入密码：");
+            inputPassword = Console.ReadLine();
             if (correctUsername == "")
             {
                 Console.WriteLine("请先注册");
                 return 2;
             }
-            else if (password == "" || username == "")
+            else if (string.IsNullOrEmpty(inputPassword) || string.IsNullOrEmpty(inputUsername))
             {
                 Console.WriteLine("请输入账户名或密码");
                 return 3;
             }
-            else if (username != correctUsername || password != correctPassword)
+            else if (inputPassword != correctUsername || inputUsername != correctPassword)
             {
                 Console.WriteLine("账户名或密码不正确");
                 return 3;
@@ -96,14 +106,38 @@ namespace Day1HW
             return 1;
         }
 
+        static bool Register(ref string username, ref string password)
+        {
+
+            string inputUsername;
+            string inputPassword;
+            string inputPassword2;
+            Console.Write("请输入用户名：");
+            inputUsername = Console.ReadLine();
+            Console.Write("请输入密码：");
+            inputPassword = Console.ReadLine();
+            Console.Write("请确认密码：");
+            inputPassword2 = Console.ReadLine();
+
+            if (inputPassword == inputPassword2 && !string.IsNullOrEmpty(inputPassword))
+            {
+                Console.WriteLine("注册成功");
+                username = inputUsername;
+                password = inputPassword;
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("确认密码必须与输入的密码一致");
+                return false;
+            }
+        }
+
         static void LoginSimulator()
         {
             string username = "";
             string password = "";
-            string inputUsername = "";
-            string inputPassword = "";
-            string inputPassword2 = "";
-            string input = "";
+            string input;
 
             bool registed = false;
 
@@ -121,35 +155,17 @@ namespace Day1HW
                     Console.Write("输入\n1.登录\n2.注册\n>");
                     input = Console.ReadLine();
                 }
+
                 if (input == "1")
                 {
-                    Console.Write("请输入用户名：");
-                    inputUsername = Console.ReadLine();
-                    Console.Write("请输入密码：");
-                    inputPassword = Console.ReadLine();
-                    result = Login(inputUsername, username, inputPassword, password);
+                    result = Login(username, password);
                 }
                 else if (input == "2")
                 {
-                    Console.Write("请输入用户名：");
-                    inputUsername = Console.ReadLine();
-                    Console.Write("请输入密码：");
-                    inputPassword = Console.ReadLine();
-                    Console.Write("请确认密码：");
-                    inputPassword2 = Console.ReadLine();
-
-                    if (inputPassword == inputPassword2 && inputPassword != "")
-                    {
-                        Console.WriteLine("注册成功");
-                        registed = true;
-                        username = inputUsername;
-                        password = inputPassword;
-                    }
-                    else {
-                        Console.WriteLine("确认密码必须与输入的密码一致");
-                    }
+                    registed = Register(ref username, ref password);
                 }
-                else {
+                else
+                {
                     Console.WriteLine("Invalid input");
                 }
             }
@@ -179,7 +195,8 @@ namespace Day1HW
             {
                 LoginSimulator();
             }
-            else {
+            else
+            {
                 Console.WriteLine("Invalid input");
             }
 
