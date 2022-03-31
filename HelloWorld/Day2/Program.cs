@@ -3,15 +3,20 @@ using System.Linq;
 
 namespace Day2
 {
+    enum MazeElement
+    {
+        floor,
+        wall,
+        player
+    }
+
     class MainClass
     {
         private static void BubbleSort(ref int[] nums)
         {
-            bool moved;
             int shorten = 0;
             while (true)
             {
-                moved = false;
                 for (int i = 0; i < nums.Length - shorten; i++)
                 {
                     if (i < nums.Length - 1)
@@ -21,11 +26,10 @@ namespace Day2
                             nums[i] = nums[i] ^ nums[i + 1];
                             nums[i + 1] = nums[i] ^ nums[i + 1];
                             nums[i] = nums[i] ^ nums[i + 1];
-                            moved = true;
                         }
                     }
                 }
-                if (!moved)
+                if (shorten >= nums.Length)
                 {
                     break;
                 }
@@ -44,18 +48,18 @@ namespace Day2
             }
         }
 
-        private static void PrintMaze(in int[,] maze)
+        private static void PrintMaze(in MazeElement[,] maze)
         {
             Console.Clear();
             for (int i = 0; i < maze.GetLength(0); i++)
             {
                 for (int j = 0; j < maze.GetLength(1); j++)
                 {
-                    if (maze[i, j] == 1)
+                    if (maze[i, j] == MazeElement.wall)
                     {
                         Console.Write("■");
                     }
-                    else if (maze[i, j] == 2)
+                    else if (maze[i, j] == MazeElement.player)
                     {
                         Console.Write("♀");
                     }
@@ -70,7 +74,7 @@ namespace Day2
             }
         }
 
-        private static void GenerateMaze(ref int[,] maze)
+        private static void GenerateMaze(ref MazeElement[,] maze)
         {
             int block = 0;
             Random random = new Random();
@@ -80,24 +84,24 @@ namespace Day2
                 {
                     if (i == 0 || i == maze.GetLength(0) - 1 || j == 0 || j == maze.GetLength(1) - 1)
                     {
-                        maze[i, j] = 1;
+                        maze[i, j] = MazeElement.wall;
                     }
                     else if (block <= 30 && random.Next(0, 10) >= 7)
                     {
-                        maze[i, j] = 1;
+                        maze[i, j] = MazeElement.wall;
                         block++;
                     }
                 }
             }
         }
 
-        private static bool CheckOverBoundry(int[] checkPos, int[,] maze)
+        private static bool CheckOverBoundry(int[] checkPos, MazeElement[,] maze)
         {
             if (checkPos[0] <= 0 || checkPos[0] >= maze.GetLength(0) - 1 || checkPos[1] <= 0 || checkPos[1] >= maze.GetLength(1) - 1)
             {
                 return false;
             }
-            else if (maze[checkPos[0], checkPos[1]] == 1)
+            else if (maze[checkPos[0], checkPos[1]] == MazeElement.wall)
             {
                 return false;
             }
@@ -107,10 +111,17 @@ namespace Day2
             }
         }
 
-        private static void MainGame(int[] position, int[,] maze) {
-            int[] newPos = new int[position.Length];
-            for (int i = 0; i < position.Length; i++) {
-                newPos[i] = position[i];
+        /// <summary>
+        /// Main loop of the demo
+        /// </summary>
+        /// <param name="position">Character position</param>
+        /// <param name="maze">Maze array</param>
+        private static void MainGame(int[] position, MazeElement[,] maze)
+        {
+            int[] _newPos = new int[position.Length];
+            for (int i = 0; i < position.Length; i++)
+            {
+                _newPos[i] = position[i];
             }
             PrintMaze(in maze);
             ConsoleKeyInfo info = Console.ReadKey();
@@ -119,29 +130,29 @@ namespace Day2
             {
                 case ConsoleKey.W:
                     // move up
-                    newPos[0] -= 1;
+                    _newPos[0] -= 1;
                     break;
                 case ConsoleKey.A:
                     // move left
-                    newPos[1] -= 1;
+                    _newPos[1] -= 1;
                     break;
                 case ConsoleKey.S:
                     // move down
-                    newPos[0] += 1;
+                    _newPos[0] += 1;
                     break;
                 case ConsoleKey.D:
                     // move right
-                    newPos[1] += 1;
+                    _newPos[1] += 1;
                     break;
                 default:
                     break;
             }
 
-            if (CheckOverBoundry(newPos, maze))
+            if (CheckOverBoundry(_newPos, maze))
             {
-                maze[position[0], position[1]] = 0;
-                position = newPos;
-                maze[position[0], position[1]] = 2;
+                maze[position[0], position[1]] = MazeElement.floor;
+                position = _newPos;
+                maze[position[0], position[1]] = MazeElement.player;
             }
 
             MainGame(position, maze);
@@ -192,7 +203,7 @@ namespace Day2
             //PrintSecondOrderArray(in numss);
             #endregion
 
-            int[,] maze = new int[12, 12];
+            MazeElement[,] maze = new MazeElement[12, 12];
 
             GenerateMaze(ref maze);
 
@@ -202,61 +213,65 @@ namespace Day2
             int row, line;
             string inputRow, inputLine;
 
+        #region set initial position
+        SetPosition:
+            //get x value
             while (true)
             {
-                //get x value
-                while (true)
+                Console.Write("请输入行：");
+                inputRow = Console.ReadLine();
+                if (!int.TryParse(inputRow, out row))
                 {
-                    Console.Write("请输入行：");
-                    inputRow = Console.ReadLine();
-                    if (!int.TryParse(inputRow, out row))
+                    Console.WriteLine("请输入正确的行");
+                    continue;
+                }
+                else
+                {
+                    if (row <= 0 || row >= maze.GetLength(0) - 1)
                     {
                         Console.WriteLine("请输入正确的行");
                         continue;
                     }
-                    else
-                    {
-                        if (row <= 0 || row >= maze.GetLength(0) - 1)
-                        {
-                            Console.WriteLine("请输入正确的行");
-                            continue;
-                        }
 
-                        position[0] = row;
-                        break;
-                    }
+                    position[0] = row;
+                    break;
                 }
+            }
 
-                //get y value
-                while (true)
+            //get y value
+            while (true)
+            {
+                Console.Write("请输入列：");
+                inputLine = Console.ReadLine();
+                if (!int.TryParse(inputLine, out line))
                 {
-                    Console.Write("请输入列：");
-                    inputLine = Console.ReadLine();
-                    if (!int.TryParse(inputLine, out line))
+                    Console.WriteLine("请输入正确的列");
+                    continue;
+                }
+                else
+                {
+                    if (line <= 0 || line >= maze.GetLength(0) - 1)
                     {
                         Console.WriteLine("请输入正确的列");
                         continue;
                     }
-                    else
-                    {
-                        if (line <= 0 || line >= maze.GetLength(0) - 1)
-                        {
-                            Console.WriteLine("请输入正确的列");
-                            continue;
-                        }
 
-                        position[1] = line;
-                        break;
-                    }
-                }
-
-                //check availability
-                if (CheckOverBoundry(position, maze))
-                {
-                    maze[position[0], position[1]] = 2;
+                    position[1] = line;
                     break;
                 }
             }
+
+            //check availability
+            if (CheckOverBoundry(position, maze))
+            {
+                maze[position[0], position[1]] = MazeElement.player;
+            }
+            else
+            {
+                goto SetPosition;
+            }
+            #endregion
+
 
 
             MainGame(position, maze);
