@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day3", "Day3\Day3.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushBox", "PushBox\PushBox.csproj", "{B4951C69-0867-4FEF-9F29-CA1CC3548950}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day4", "Day4\Day4.csproj", "{F7AEEA55-9924-4527-A5DF-085340291A4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|anycpu = Debug|anycpu
@@ -39,6 +41,10 @@ Global
 		{B4951C69-0867-4FEF-9F29-CA1CC3548950}.Debug|anycpu.Build.0 = Debug|anycpu
 		{B4951C69-0867-4FEF-9F29-CA1CC3548950}.Release|anycpu.ActiveCfg = Release|anycpu
 		{B4951C69-0867-4FEF-9F29-CA1CC3548950}.Release|anycpu.Build.0 = Release|anycpu
+		{F7AEEA55-9924-4527-A5DF-085340291A4A}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{F7AEEA55-9924-4527-A5DF-085340291A4A}.Debug|anycpu.Build.0 = Debug|anycpu
+		{F7AEEA55-9924-4527-A5DF-085340291A4A}.Release|anycpu.ActiveCfg = Release|anycpu
+		{F7AEEA55-9924-4527-A5DF-085340291A4A}.Release|anycpu.Build.0 = Release|anycpu
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
