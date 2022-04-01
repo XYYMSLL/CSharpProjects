@@ -45,14 +45,13 @@ namespace Day2
         /// Main loop of the demo
         /// </summary>
         /// <param name="maze">Map object</param>
-        private static void MainLoop(Map maze)
+        private static void MainLoop(Controller controller)
         {
             while (true)
             {
-                maze.printMaze();
                 ConsoleKeyInfo info = Console.ReadKey();
 
-                maze.movePlayer(info);
+                controller.MovePlayer(info);
             }
         }
 
@@ -101,12 +100,11 @@ namespace Day2
             //PrintSecondOrderArray(in numss);
             #endregion
 
-            Map newMap = new Map();
-            newMap.printMaze();
+            Controller newController = new Controller();
 
-            newMap.SetPlayerPosition();
+            newController.SetPlayerPosition();
 
-            MainLoop(newMap);
+            MainLoop(newController);
         }
     }
 }
