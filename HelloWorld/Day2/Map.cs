@@ -157,15 +157,6 @@ namespace Day2
             }
         }
 
-        //private MazeElement GetTile(int x, int y)
-        //{
-        //    if (x >= _Map.GetLength(0) || y > _Map.GetLength(1))
-        //    {
-        //        return MazeElement.voidTile;
-        //    }
-        //    return _Map[x, y];
-        //}
-
         private void GenerateMaze(int x, int y)
         {
             _Map = new MazeElement[x, y];
