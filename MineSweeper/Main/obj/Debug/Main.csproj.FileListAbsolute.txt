@@ -1,0 +1,6 @@
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/MineSweeper/Main/bin/Debug/Main.exe
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/MineSweeper/Main/bin/Debug/Main.pdb
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/MineSweeper/Main/obj/Debug/Main.csproj.AssemblyReference.cache
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/MineSweeper/Main/obj/Debug/Main.csproj.CoreCompileInputs.cache
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/MineSweeper/Main/obj/Debug/Main.exe
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/MineSweeper/Main/obj/Debug/Main.pdb

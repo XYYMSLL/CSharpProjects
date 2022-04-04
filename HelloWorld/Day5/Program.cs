@@ -33,20 +33,20 @@ namespace Day5
     class NonPeople
     { }
 
-    //class Singleton
-    //{
-    //    private static Singleton _instance = null;
+    class Singleton
+    {
+        private static Singleton _instance = null;
 
-    //    private Singleton() { }
+        private Singleton() { }
 
-    //    public static Singleton Instance
-    //    {
-    //        get
-    //        {
-    //            _instance ??= new Singleton();
+        public static Singleton Instance
+        {
+            get
+            {
+                _instance ??= new Singleton();
 
-    //            return _instance;
-    //        }
-    //    }
-    //}
+                return _instance;
+            }
+        }
+    }
 }
