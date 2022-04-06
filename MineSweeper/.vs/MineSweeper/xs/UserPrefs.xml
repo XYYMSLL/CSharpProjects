@@ -1,27 +1,28 @@
 ﻿<Properties StartupConfiguration="{EF724EEF-2397-43BA-8B03-9ECA237C36BE}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Main/Program.cs">
+  <MonoDevelop.Ide.ItemProperties.Main PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Main/Grid.cs">
     <Files>
       <File FileName="Main/Program.cs" Line="14" Column="20" />
-      <File FileName="Main/Grid.cs" Line="189" Column="81" />
-      <File FileName="Main/Control.cs" Line="133" Column="20" />
+      <File FileName="Main/Grid.cs" Line="196" Column="10" />
+      <File FileName="Main/Control.cs" Line="88" Column="51" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="MineSweeper" expanded="True">
-            <Node name="Main" expanded="True">
-              <Node name="Program.cs" selected="True" />
-            </Node>
+          <Node name="MineSweeper" expanded="True" selected="True">
+            <Node name="Main" expanded="True" />
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Main PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|anycpu" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|anycpu" />
   <MultiItemStartupConfigurations />
 </Properties>

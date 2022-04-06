@@ -36,9 +36,15 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IPlayer.cs" />
+    <Compile Include="IRole.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="Monster.cs" />
+    <Compile Include="Weapon.cs" />
+    <Compile Include="WeaponEnum.cs" />
+    <Compile Include="IWeapon.cs" />
+    <Compile Include="Swords.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -268,6 +268,8 @@ namespace Main
 
                 Console.WriteLine("");
             }
+
+            Console.WriteLine("WASD或方向键控制光标移动，J踩，K标记");
         }
 
         public bool Reveal(int x, int y)

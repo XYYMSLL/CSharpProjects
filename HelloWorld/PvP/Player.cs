@@ -1,50 +1,91 @@
 ﻿using System;
 namespace PvP
 {
-    public class Player : IPlayer
+    public class Player : Role, IRole
     {
-        private int _hp;
-        private string _name;
+        private MithrilSword _mithrilSword = new MithrilSword();
+        private SteelSword _steelSword = new SteelSword();
+        private WoodenSword _woodenSword = new WoodenSword();
 
-        public int HP { get => _hp; }
-        public string Name { get => _name; }
-
-        public Player(string name)
+        public Player(int maxHP, string Name, int ATK, int DEF) : base(maxHP, Name, ATK, DEF)
         {
-            _name = name;
-            _hp = 100;
         }
 
-        public void WodenSword(Player otherPlayer)
+        public void UseWodenSword(Player otherPlayer)
         {
-            otherPlayer.TakeDamage(10);
-            Console.WriteLine("{0}使用了木剑，对{1}造成了10点伤害，{1}还有{2}点HP", _name, otherPlayer.Name, otherPlayer.HP);
+            int dmg = _woodenSword.Attack(out string extraMsg);
+            otherPlayer.TakeDamage(dmg);
+            PrintAtkResult("木剑", dmg, otherPlayer);
         }
-
-        public void TakeDamage(int damage)
+        public void UseWodenSword(Monster otherPlayer)
         {
-            _hp = _hp - damage < 0 ? 0 : _hp - damage;
+            int dmg = _woodenSword.Attack(out string extraMsg);
+            otherPlayer.TakeDamage(dmg);
+            PrintAtkResult("木剑", dmg, otherPlayer);
         }
 
         public void Heal()
         {
-            _hp = _hp + 10 > 100 ? 100 : _hp + 10;
-            Console.WriteLine("{0}使用了治疗，恢复了10点HP，{0}还有{1}点HP", _name, _hp);
+            SetHP = HP + 10 > MaxHP ? MaxHP : HP + 10;
+            Console.WriteLine("{0}使用了治疗，恢复了10点HP，{0}还有{1}点HP", Name, HP);
         }
 
-        public void SteelSword(Player otherPlayer)
+        public void UseSteelSword(Player otherPlayer)
         {
-            otherPlayer.TakeDamage(15);
-            Console.WriteLine("{0}使用了钢剑，对{1}造成了15点伤害，{1}还有{2}点HP", _name, otherPlayer.Name, otherPlayer.HP);
+            string criticalStr;
+            int dmg = _steelSword.Attack(out criticalStr);
+            otherPlayer.TakeDamage(dmg);
+            PrintAtkResult("钢剑", dmg, otherPlayer, criticalStr);
         }
-
-        public void MithrilSword(Player otherPlayer)
+        public void UseSteelSword(Monster otherPlayer)
         {
-            otherPlayer.TakeDamage(30);
-            Console.WriteLine("{0}使用了秘银剑，对{1}造成了30点伤害，{1}还有{2}点HP", _name, otherPlayer.Name, otherPlayer.HP);
+            string criticalStr;
+            int dmg = _steelSword.Attack(out criticalStr);
+            otherPlayer.TakeDamage(dmg);
+            PrintAtkResult("钢剑", dmg, otherPlayer, criticalStr);
         }
 
-        public void RandomMove(Player otherPlayer, Random random)
+        public void UseMithrilSword(Player otherPlayer)
+        {
+            string extraMsg;
+            int dmg = _mithrilSword.Attack(out extraMsg);
+            otherPlayer.TakeDamage(dmg);
+            PrintAtkResult("秘银剑", dmg, otherPlayer, extraMsg);
+        }
+        public void UseMithrilSword(Monster otherPlayer)
+        {
+            string extraMsg;
+            int dmg = _mithrilSword.Attack(out extraMsg);
+            otherPlayer.TakeDamage(dmg);
+            PrintAtkResult("秘银剑", dmg, otherPlayer, extraMsg);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            int actualDmg = (damage - Def) <= 0 ? 1 : (damage - Def);
+            SetHP = (HP - actualDmg) < 0 ? 0 : (HP - actualDmg);
+
+            if (HP <= 0)
+            {
+                Die();
+            }
+        }
+
+        private void PrintAtkResult(string EName, int damage, Player other, string extraMsg = "")
+        {
+            Console.WriteLine("{0}使用了{4}，{5}对{1}造成了{3}点伤害，{1}还有{2}点HP", Name, other.Name, other.HP, damage-other.Def, EName, extraMsg);
+        }
+        private void PrintAtkResult(string EName, int damage, Monster other, string extraMsg = "")
+        {
+            Console.WriteLine("{0}使用了{4}，{5}对{1}造成了{3}点伤害，{1}还有{2}点HP", Name, other.Name, other.HP, damage-other.Def, EName, extraMsg);
+        }
+
+        private void Die()
+        {
+            Console.WriteLine("AWSL");
+        }
+
+        public void RandomMove(Player otherPlayer)
         {
             int rNum = random.Next(0, 10);
             if (rNum >= 8)
@@ -53,15 +94,36 @@ namespace PvP
             }
             else if (rNum >= 7)
             {
-                MithrilSword(otherPlayer);
+                UseMithrilSword(otherPlayer);
             }
             else if (rNum >= 4)
             {
-                SteelSword(otherPlayer);
+                UseSteelSword(otherPlayer);
             }
             else
             {
-                WodenSword(otherPlayer);
+                UseWodenSword(otherPlayer);
+            }
+        }
+
+        public void RandomMove(Monster otherPlayer)
+        {
+            int rNum = random.Next(0, 10);
+            if (rNum >= 8)
+            {
+                Heal();
+            }
+            else if (rNum >= 7)
+            {
+                UseMithrilSword(otherPlayer);
+            }
+            else if (rNum >= 4)
+            {
+                UseSteelSword(otherPlayer);
+            }
+            else
+            {
+                UseWodenSword(otherPlayer);
             }
         }
     }

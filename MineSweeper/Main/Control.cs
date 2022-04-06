@@ -85,6 +85,7 @@ namespace Main
                     }
                 }
 
+                _grid = new Grid(count, row, col);
                 return;
             }
         }
