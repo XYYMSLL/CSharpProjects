@@ -47,11 +47,14 @@ namespace Day2
         /// <param name="maze">Map object</param>
         private static void MainLoop(Controller controller)
         {
-            while (true)
+            bool loop = true;
+            while (loop)
             {
-                ConsoleKeyInfo info = Console.ReadKey();
+                ConsoleKeyInfo info = Console.ReadKey(true);
 
-                controller.MovePlayer(info);
+                //Console.WriteLine(" ", Console.WindowWidth);
+
+                loop = !controller.MovePlayer(info);
             }
         }
 

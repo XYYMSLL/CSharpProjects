@@ -1,9 +1,9 @@
 ﻿using System;
-namespace PvP
+namespace Day2
 {
 	public class WoodenSword : Weapon
 	{
-		public WoodenSword() : base(WeaponEnum.WoodenSword, "WoodenSword", 10, 0)
+		public WoodenSword() : base(WeaponEnum.WoodenSword, "木剑", 10, 0)
 		{
 		}
 
@@ -17,7 +17,7 @@ namespace PvP
 	public class SteelSword : Weapon
 	{
         private Random random = new Random();
-		public SteelSword() : base(WeaponEnum.SteelSword, "SteelSword", 8, 15)
+		public SteelSword() : base(WeaponEnum.SteelSword, "钢剑", 8, 15)
 		{ }
 
         public override int Attack(out string extraMsg)
@@ -36,7 +36,7 @@ namespace PvP
 	public class MithrilSword : Weapon
 	{
 		private Random random = new Random();
-		public MithrilSword() : base(WeaponEnum.MithrilSword, "MithrilSword", 8, 15)
+		public MithrilSword() : base(WeaponEnum.MithrilSword, "秘银剑", 8, 15)
 		{ }
 
         public override int Attack(out string extraMsg)

@@ -2,23 +2,30 @@
 
 namespace Day2
 {
-    enum MazeElement
+    public enum MazeElement
     {
         floor,
         wall,
         player,
-        voidTile
+        monster,
+        voidTile,
+        woodenSword,
+        steelSword,
+        mithrilSword
     }
 
     class Controller
     {
         private Player _newPlayer;
+        private Monster _newMonster;
         private Map _newMap;
 
+        private int[] _monsterPos = new int[2];
 
         public Controller(params int[] dimensions)
         {
-            _newPlayer = new Player();
+            _newPlayer = new Player(100, "Player1", 6, 5);
+            _newMonster = new Monster(50, "小龙虾", 12, 3);
             _newMap = new Map(dimensions);
         }
 
@@ -88,7 +95,12 @@ namespace Day2
             #endregion
         }
 
-        public void MovePlayer(ConsoleKeyInfo keyInfo)
+        public void SetMonsterPosition()
+        {
+            _monsterPos = _newMap.MonsterPos;
+        }
+
+        public bool MovePlayer(ConsoleKeyInfo keyInfo)
         {
             int[] _newPos = new int[_newPlayer.Position.Length];
             for (int i = 0; i < _newPos.Length; i++)
@@ -115,25 +127,67 @@ namespace Day2
                     _newPos[1] += 1;
                     break;
                 default:
-                    return;
+                    return false;
             }
 
-            if (_newMap.MovePlayer(_newPlayer.Position, _newPos))
+            MazeElement nextTile = _newMap.MovePlayer(_newPlayer.Position, _newPos);
+
+            if (nextTile != MazeElement.wall && nextTile != MazeElement.monster && nextTile != MazeElement.voidTile)
             {
                 _newPlayer.Position[0] = _newPos[0];
                 _newPlayer.Position[1] = _newPos[1];
+
+                Console.SetCursorPosition(0, _newMap.MapLength + 1);
+                if (nextTile == MazeElement.woodenSword)
+                {
+                    WoodenSword woodenSword = new WoodenSword();
+                    _newPlayer.SetWeapon(woodenSword);
+                }
+                if (nextTile == MazeElement.steelSword)
+                {
+                    SteelSword steelSword = new SteelSword();
+                    _newPlayer.SetWeapon(steelSword);
+                }
+                if (nextTile == MazeElement.mithrilSword)
+                {
+                    MithrilSword mithrilSword = new MithrilSword();
+                    _newPlayer.SetWeapon(mithrilSword);
+                }
+
+                return false;
+            }
+            else
+            {
+                if (nextTile == MazeElement.monster)
+                {
+                    Console.SetCursorPosition(0, _newMap.MapLength + 1);
+                    while (_newPlayer.HP > 0 && _newMonster.HP > 0)
+                    {
+                        _newPlayer.RandomMove(_newMonster);
+                        if (_newMonster.HP <= 0)
+                        {
+                            Console.WriteLine("{0} Win", _newPlayer.Name);
+                            break;
+                        }
+                        _newMonster.RandomMove(_newPlayer);
+                        if (_newPlayer.HP <= 0)
+                        {
+                            Console.WriteLine("{0} Win", _newMonster.Name);
+                        }
+                    }
+                    return true;
+                }
+
+                return false;
             }
         }
-    }
-
-    class Player
-    {
-        public int[] Position { set; get; } = new int[] { 0, 0 };
     }
 
     public class Map
     {
         private MazeElement[,] _Map;
+
+        public int[] MonsterPos = new int[2];
 
         public int MapLength { get => _Map.GetLength(0); }
         public int MapWidth { get => _Map.GetLength(1); }
@@ -154,6 +208,44 @@ namespace Day2
                 int x = Math.Max(parameters[0], 12);
                 int y = Math.Max(parameters[1], 12);
                 GenerateMaze(x, y);
+            }
+        }
+
+        private void SetWeapon()
+        {
+            Random random = new Random();
+            while (true)
+            {
+                int rRow = random.Next(1, MapLength - 1);
+                int rCol = random.Next(1, MapWidth - 1);
+
+                if (_Map[rRow, rCol] == MazeElement.floor)
+                {
+                    _Map[rRow, rCol] = MazeElement.woodenSword;
+                    break;
+                }
+            }
+            while (true)
+            {
+                int rRow = random.Next(1, MapLength - 1);
+                int rCol = random.Next(1, MapWidth - 1);
+
+                if (_Map[rRow, rCol] == MazeElement.floor)
+                {
+                    _Map[rRow, rCol] = MazeElement.steelSword;
+                    break;
+                }
+            }
+            while (true)
+            {
+                int rRow = random.Next(1, MapLength - 1);
+                int rCol = random.Next(1, MapWidth - 1);
+
+                if (_Map[rRow, rCol] == MazeElement.floor)
+                {
+                    _Map[rRow, rCol] = MazeElement.mithrilSword;
+                    break;
+                }
             }
         }
 
@@ -179,7 +271,29 @@ namespace Day2
                 }
             }
 
+            SetWeapon();
+            SetMonsterPos();
             PrintMaze();
+        }
+
+        private void SetMonsterPos()
+        {
+            int rRow, rCol;
+            Random random = new Random();
+            while (true)
+            {
+                rRow = random.Next(1, MapLength);
+                rCol = random.Next(1, MapWidth);
+
+                if (_Map[rRow, rCol] == MazeElement.floor)
+                {
+                    _Map[rRow, rCol] = MazeElement.monster;
+                    break;
+                }
+            }
+
+            MonsterPos[0] = rRow;
+            MonsterPos[1] = rCol;
         }
 
         private void PrintMaze()
@@ -196,6 +310,22 @@ namespace Day2
                     else if (_Map[i, j] == MazeElement.player)
                     {
                         Console.Write("♀");
+                    }
+                    else if (_Map[i, j] == MazeElement.woodenSword)
+                    {
+                        Console.Write("W");
+                    }
+                    else if (_Map[i, j] == MazeElement.steelSword)
+                    {
+                        Console.Write("S");
+                    }
+                    else if (_Map[i, j] == MazeElement.mithrilSword)
+                    {
+                        Console.Write("M");
+                    }
+                    else if (_Map[i, j] == MazeElement.monster)
+                    {
+                        Console.Write("X");
                     }
                     else
                     {
@@ -258,20 +388,48 @@ namespace Day2
             Console.SetCursorPosition(0, _Map.GetLength(0));
         }
 
-        public bool MovePlayer(int[] oldPosition, int[] newPosition)
+        public MazeElement MovePlayer(int[] oldPosition, int[] newPosition)
         {
             if (CheckOverBoundry(newPosition))
             {
-                _Map[oldPosition[0], oldPosition[1]] = MazeElement.floor;
-                RedrawTile(oldPosition, MazeElement.floor);
-                _Map[newPosition[0], newPosition[1]] = MazeElement.player;
-                RedrawTile(newPosition, MazeElement.player);
+                switch (_Map[newPosition[0], newPosition[1]])
+                {
+                    case MazeElement.floor:
+                        _Map[oldPosition[0], oldPosition[1]] = MazeElement.floor;
+                        RedrawTile(oldPosition, MazeElement.floor);
+                        _Map[newPosition[0], newPosition[1]] = MazeElement.player;
+                        RedrawTile(newPosition, MazeElement.player);
 
-                return true;
+                        return MazeElement.floor;
+                    case MazeElement.monster:
+                        return MazeElement.monster;
+                    case MazeElement.woodenSword:
+                        _Map[oldPosition[0], oldPosition[1]] = MazeElement.floor;
+                        RedrawTile(oldPosition, MazeElement.floor);
+                        _Map[newPosition[0], newPosition[1]] = MazeElement.player;
+                        RedrawTile(newPosition, MazeElement.player);
+                        _Map[newPosition[0], newPosition[1]] = MazeElement.floor;
+                        return MazeElement.woodenSword;
+                    case MazeElement.steelSword:
+                        _Map[oldPosition[0], oldPosition[1]] = MazeElement.floor;
+                        RedrawTile(oldPosition, MazeElement.floor);
+                        _Map[newPosition[0], newPosition[1]] = MazeElement.player;
+                        RedrawTile(newPosition, MazeElement.player);
+                        _Map[newPosition[0], newPosition[1]] = MazeElement.floor;
+                        return MazeElement.steelSword;
+                    case MazeElement.mithrilSword:
+                        _Map[oldPosition[0], oldPosition[1]] = MazeElement.floor;
+                        RedrawTile(oldPosition, MazeElement.floor);
+                        _Map[newPosition[0], newPosition[1]] = MazeElement.player;
+                        RedrawTile(newPosition, MazeElement.player);
+                        _Map[newPosition[0], newPosition[1]] = MazeElement.floor;
+                        return MazeElement.mithrilSword;
+                }
+                return MazeElement.voidTile;
             }
             else
             {
-                return false;
+                return MazeElement.wall;
             }
         }
     }
