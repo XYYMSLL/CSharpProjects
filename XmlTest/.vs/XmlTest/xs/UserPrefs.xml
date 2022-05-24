@@ -1,0 +1,24 @@
+﻿<Properties StartupConfiguration="{CF66C3E0-C92E-415F-AC1A-CCEA197EDA2A}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="XmlTest/Program.cs">
+    <Files>
+      <File FileName="XmlTest/Program.cs" Line="34" Column="1" />
+      <File FileName="XmlTest/zhenghuo.xml" Line="4" Column="31" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="XmlTest" expanded="True">
+            <Node name="XmlTest" expanded="True" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|anycpu" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.XmlTest PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

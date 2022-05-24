@@ -1,0 +1,28 @@
+﻿<Properties StartupConfiguration="{4E696949-4552-461B-B69F-A06B872D7939}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="BoardGame/RingList.cs">
+    <Files>
+      <File FileName="BoardGame/Program.cs" Line="10" Column="32" />
+      <File FileName="BoardGame/Square.cs" />
+      <File FileName="BoardGame/Control.cs" />
+      <File FileName="BoardGame/RingList.cs" Line="27" Column="34" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="W2" expanded="True">
+            <Node name="BoardGame" expanded="True" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.LLStack FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|anycpu" />
+  <MonoDevelop.Ide.ItemProperties.BoardGame PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.IntParser FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

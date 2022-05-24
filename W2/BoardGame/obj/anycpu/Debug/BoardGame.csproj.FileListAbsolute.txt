@@ -1,0 +1,5 @@
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/W2/BoardGame/bin/Debug/BoardGame.exe
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/W2/BoardGame/bin/Debug/BoardGame.pdb
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/W2/BoardGame/obj/anycpu/Debug/BoardGame.csproj.CoreCompileInputs.cache
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/W2/BoardGame/obj/anycpu/Debug/BoardGame.exe
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/W2/BoardGame/obj/anycpu/Debug/BoardGame.pdb
