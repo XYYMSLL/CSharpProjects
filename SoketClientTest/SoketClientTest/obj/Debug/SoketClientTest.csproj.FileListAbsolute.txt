@@ -1,0 +1,6 @@
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/SoketClientTest/SoketClientTest/bin/Debug/SoketClientTest.exe
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/SoketClientTest/SoketClientTest/bin/Debug/SoketClientTest.pdb
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/SoketClientTest/SoketClientTest/obj/Debug/SoketClientTest.csproj.AssemblyReference.cache
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/SoketClientTest/SoketClientTest/obj/Debug/SoketClientTest.csproj.CoreCompileInputs.cache
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/SoketClientTest/SoketClientTest/obj/Debug/SoketClientTest.exe
+/Users/XZhou/Documents/yxqz2101HW/C#Project/CSharpProjects/SoketClientTest/SoketClientTest/obj/Debug/SoketClientTest.pdb

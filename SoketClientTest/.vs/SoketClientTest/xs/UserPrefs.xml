@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{5447210A-9A50-419F-8643-683804ACA7E0}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SoketClientTest/Program.cs">
+    <Files>
+      <File FileName="SoketClientTest/Program.cs" Line="38" Column="40" />
+      <File FileName="../SocketTest/SocketTest/Program.cs" Line="51" Column="50" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SocketTest" expanded="True">
+            <Node name="SocketTest" expanded="True" />
+          </Node>
+          <Node name="SoketClientTest" expanded="True">
+            <Node name="SoketClientTest" expanded="True">
+              <Node name="Program.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.SoketClientTest PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|anycpu" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
